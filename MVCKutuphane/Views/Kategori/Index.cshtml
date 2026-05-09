@@ -1,0 +1,83 @@
+﻿
+
+    @{
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/Layout.cshtml";
+    }
+  
+
+    <div class="container-fluid">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h3 class="fw-bold mb-1">Kategori Listesi</h3>
+                <p class="text-muted mb-0">Kütüphanedeki kitap kategorilerini buradan yönetebilirsiniz.</p>
+            </div>
+
+            <a href="/Kategori/YeniKategori" class="btn btn-primary rounded-pill px-4">
+                <i class="fa-solid fa-plus me-2"></i>
+                Yeni Kategori Ekle
+            </a>
+        </div>
+
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-header bg-white border-0 py-3 rounded-top-4">
+                <h5 class="mb-0 fw-bold">
+                    <i class="fa-solid fa-layer-group text-primary me-2"></i>
+                    Kategoriler
+                </h5>
+            </div>
+
+            <div class="card-body">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width:100px;">ID</th>
+                            <th>Kategori Adı</th>
+                            <th class="text-center" style="width:220px;">İşlemler</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="badge bg-secondary rounded-pill px-3">
+                                        @item.ID
+                                    </span>
+                                </td>
+
+                                <td class="fw-semibold">
+                                    @item.AD
+                                </td>
+
+                                <td class="text-center">
+                                    <a href="/Kategori/KategoriGetir/@item.ID"
+                                       class="btn btn-warning btn-sm rounded-pill px-3 me-1">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                        Güncelle
+                                    </a>
+
+                                    <a href="/Kategori/Sil/@item.ID"
+                                       class="btn btn-danger btn-sm rounded-pill px-3"
+                                       onclick="return confirm('Bu kategoriyi silmek istediğinize emin misiniz?');">
+                                        <i class="fa-solid fa-trash"></i>
+                                        Sil
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="mt-4">
+                    <a href="/Kategori/CreateCategory" class="btn btn-success rounded-pill px-4">
+                        <i class="fa-solid fa-circle-plus me-2"></i>
+                        Yeni Kategori Ekle
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
