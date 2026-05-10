@@ -1,0 +1,136 @@
+﻿@using MVCKutuphane.Models.Entity
+@model List<TBLKITAP>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+
+
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h3 class="fw-bold mb-1">Kitap Listesi</h3>
+            <p class="text-muted mb-0">
+                Kütüphanedeki kitapları buradan yönetebilirsiniz.
+            </p>
+        </div>
+
+        <a href="/Kitap/KitapEkle"
+           class="btn btn-primary rounded-pill px-4">
+
+            <i class="fa-solid fa-plus me-2"></i>
+            Yeni Kitap Ekle
+        </a>
+
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-header bg-white border-0 py-3 rounded-top-4">
+
+            <h5 class="mb-0 fw-bold">
+                <i class="fa-solid fa-book text-primary me-2"></i>
+                Kitaplar
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-light">
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Kitap Adı</th>
+                        <th>Kategori</th>
+                        <th>Yazar</th>
+                        <th>Yayınevi</th>
+                        <th>Basım Yılı</th>
+                        <th>Sayfa</th>
+                        <th>Sil</th>
+                        <th>Güncelle</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                <span class="badge bg-secondary rounded-pill px-3">
+                                    @item.ID
+                                </span>
+                            </td>
+
+                            <td class="fw-semibold">
+                                @item.AD
+                            </td>
+
+                            <td>
+                                @item.TBLKATEGORI.AD
+                            </td>
+
+                            <td>
+                                @item.TBLYAZAR.AD @item.TBLYAZAR.SOYAD
+                            </td>
+
+                            <td>
+                                @item.YAYIMEVI
+                            </td>
+
+                            <td>
+                                @item.BASIMYIL
+                            </td>
+
+                            <td>
+                                @item.SAYFA
+                            </td>
+
+                            <td>
+
+                                <a href="/Kitap/KitapSil/@item.ID"
+                                   class="btn btn-danger btn-sm rounded-pill px-3"
+                                   onclick="return confirm('Kitabı silmek istediğinize emin misiniz?');">
+
+                                    <i class="fa-solid fa-trash me-1"></i>
+                                    Sil
+
+                                </a>
+
+                            </td>
+
+                            <td>
+
+                                <a href="/Kitap/KitapGetir/@item.ID"
+                                   class="btn btn-warning btn-sm rounded-pill px-3">
+
+                                    <i class="fa-solid fa-pen-to-square me-1"></i>
+                                    Güncelle
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

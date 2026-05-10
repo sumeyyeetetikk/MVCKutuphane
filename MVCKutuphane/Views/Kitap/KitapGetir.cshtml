@@ -1,0 +1,149 @@
+﻿
+@model MVCKutuphane.Models.Entity.TBLKITAP
+
+@{
+    ViewBag.Title = "KitapGetir";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h3 class="fw-bold mb-1">Kitap Güncelle</h3>
+
+            <p class="text-muted mb-0">
+                Kitap bilgilerini düzenleyebilirsiniz.
+            </p>
+        </div>
+
+        <a href="/Kitap/Index"
+           class="btn btn-secondary rounded-pill px-4">
+
+            <i class="fa-solid fa-arrow-left me-2"></i>
+            Listeye Dön
+
+        </a>
+
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+
+        <div class="card-body p-4">
+
+            @using (Html.BeginForm("KitapGuncelle", "Kitap", FormMethod.Post))
+            {
+
+                @Html.HiddenFor(x => x.ID)
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Kitap Adı
+                    </label>
+
+                    @Html.TextBoxFor(x => x.AD, new
+                    {
+                        @class = "form-control form-control-lg rounded-4"
+                    })
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Kategori
+                    </label>
+
+                    @Html.DropDownListFor(x => x.TBLKATEGORI.ID,
+                        (List<SelectListItem>)ViewBag.dgr1,
+                        new
+                        {
+                            @class = "form-select form-select-lg rounded-4"
+                        })
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Yazar
+                    </label>
+
+                    @Html.DropDownListFor(x => x.TBLYAZAR.ID,
+                        (List<SelectListItem>)ViewBag.dgr2,
+                        new
+                        {
+                            @class = "form-select form-select-lg rounded-4"
+                        })
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Yayınevi
+                    </label>
+
+                    @Html.TextBoxFor(x => x.YAYIMEVI, new
+                    {
+                        @class = "form-control form-control-lg rounded-4"
+                    })
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Basım Yılı
+                    </label>
+
+                    @Html.TextBoxFor(x => x.BASIMYIL, new
+                    {
+                        @class = "form-control form-control-lg rounded-4"
+                    })
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-semibold">
+                        Sayfa Sayısı
+                    </label>
+
+                    @Html.TextBoxFor(x => x.SAYFA, new
+                    {
+                        @class = "form-control form-control-lg rounded-4"
+                    })
+
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <button type="submit"
+                            class="btn btn-warning rounded-pill px-4">
+
+                        <i class="fa-solid fa-floppy-disk me-2"></i>
+                        Güncelle
+
+                    </button>
+
+                    <a href="/Kitap/Index"
+                       class="btn btn-outline-secondary rounded-pill px-4">
+
+                        İptal
+
+                    </a>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+
+</div>
+
