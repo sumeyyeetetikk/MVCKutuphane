@@ -26,12 +26,25 @@ namespace MVCKutuphane.Controllers
         {
             db.TBLKATEGORI.Add(p);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return View();
         }
         public ActionResult Sil(int id)
         {
             var kategori = db.TBLKATEGORI.Find(id);
             db.TBLKATEGORI.Remove(kategori);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult KategoriGetir(int id)
+
+        {
+            var ktg = db.TBLKATEGORI.Find(id);
+            return View("KategoriGetir", ktg);
+        }
+        public ActionResult KategoriGuncelle(TBLKATEGORI p)
+        {
+            var ktg = db.TBLKATEGORI.Find(p.ID);
+            ktg.AD=p.AD;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

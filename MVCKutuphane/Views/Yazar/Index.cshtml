@@ -1,0 +1,76 @@
+﻿@model List<MVCKutuphane.Models.Entity.TBLYAZAR>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="fw-bold mb-1">Yazar Listesi</h3>
+            <p class="text-muted mb-0">Kütüphanedeki yazarları buradan yönetebilirsiniz.</p>
+        </div>
+
+        <a href="/Yazar/YazarEkle" class="btn btn-primary rounded-pill px-4">
+            <i class="fa-solid fa-plus me-2"></i>
+            Yeni Yazar Ekle
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-header bg-white border-0 py-3 rounded-top-4">
+            <h5 class="mb-0 fw-bold">
+                <i class="fa-solid fa-user-pen text-primary me-2"></i>
+                Yazarlar
+            </h5>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Detay</th>
+                        <th>Sil</th>
+                        <th>Güncelle</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <span class="badge bg-secondary rounded-pill px-3">
+                                    @item.ID
+                                </span>
+                            </td>
+                            <td class="fw-semibold">@item.AD</td>
+                            <td class="fw-semibold">@item.SOYAD</td>
+                            <td>@item.Detay</td>
+                            <td>
+                                @Html.ActionLink("Sil", "YazarSil", new { id = item.ID }, new
+                       { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor Musunuz?')" })
+                            </td>
+                            <td><a href="/Yazar/YazarGetir/@item.ID" class="btn btn-success">Güncelle</a></td>
+                      
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="mt-4">
+                <a href="/Yazar/YazarEkle" class="btn btn-success rounded-pill px-4">
+                    <i class="fa-solid fa-circle-plus me-2"></i>
+                    Yeni Yazar Ekle
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
