@@ -44,7 +44,10 @@ namespace MVCKutuphane.Controllers
         [HttpPost]
         public ActionResult KitapEkle(TBLKITAP p)
         {
-           var ktg= db.TBLKATEGORI.Where(k=> k.ID == p.TBLKATEGORI.ID).FirstOrDefault();
+
+            p.DURUM = true;
+
+            var ktg= db.TBLKATEGORI.Where(k=> k.ID == p.TBLKATEGORI.ID).FirstOrDefault();
             var yzr = db.TBLYAZAR.Where(y=> y.ID == p.TBLYAZAR.ID).FirstOrDefault();
             p.TBLKATEGORI = ktg;
             p.TBLYAZAR = yzr;

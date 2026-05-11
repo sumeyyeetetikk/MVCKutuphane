@@ -23,7 +23,7 @@ namespace MVCKutuphane.Models.Entity
         public int ID { get; set; }
         public Nullable<int> KITAP { get; set; }
         public Nullable<int> UYE { get; set; }
-        public Nullable<int> PERSONEL { get; set; }
+        public Nullable<byte> PERSONEL { get; set; }
         public Nullable<System.DateTime> ALISTARIH { get; set; }
         public Nullable<System.DateTime> IADETARIH { get; set; }
     
@@ -32,5 +32,6 @@ namespace MVCKutuphane.Models.Entity
         public virtual TBLKITAP TBLKITAP { get; set; }
         public virtual TBLKITAP TBLKITAP1 { get; set; }
         public virtual TBLUYELER TBLUYELER { get; set; }
+        public virtual TBLPERSONEL TBLPERSONEL { get; set; }
     }
 }
