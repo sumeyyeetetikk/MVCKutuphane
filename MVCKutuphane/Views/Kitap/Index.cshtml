@@ -16,6 +16,14 @@
 
         <div>
             <h3 class="fw-bold mb-1">Kitap Listesi</h3>
+            @using (Html.BeginForm("Index", "Kitap", FormMethod.Get))
+            {
+                <div style="margin-bottom:15px; margin-top:15px;">
+                    <b>
+                        Aranacak Kitap Adını Girin :</b> @Html.TextBox("p")
+                        <input type="submit" value="Ara" />
+                </div>
+            }
             <p class="text-muted mb-0">
                 Kütüphanedeki kitapları buradan yönetebilirsiniz.
             </p>

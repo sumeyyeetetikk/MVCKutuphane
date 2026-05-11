@@ -10,10 +10,14 @@ namespace MVCKutuphane.Controllers
     public class KitapController : Controller
     {
         DBKUTUPHANEEntities db = new DBKUTUPHANEEntities();
-        public ActionResult Index()
+        public ActionResult Index(string p)
         {
-            var kitaplar = db.TBLKITAP.ToList();
-            return View(kitaplar);
+            var kitaplar = from k in db.TBLKITAP select k;
+            if(!string.IsNullOrEmpty(p))
+            {
+                kitaplar = kitaplar.Where(m => m.AD.Contains(p));
+            }
+            return View(kitaplar.ToList());
         }
 
         [HttpGet]
@@ -88,7 +92,7 @@ namespace MVCKutuphane.Controllers
             var yzr=db.TBLYAZAR.Where(y=> y.ID ==p.TBLYAZAR.ID).FirstOrDefault();
             kitap.KATEGORI = ktg.ID;
             kitap.YAZAR = yzr.ID;
-            db.SaveChanges();
+            db.SaveChanges(); 
             return RedirectToAction("Index");
         }
     }
