@@ -10,7 +10,7 @@ namespace MVCKutuphane.Controllers
     public class OduncController : Controller
     {
         DBKUTUPHANEEntities db = new DBKUTUPHANEEntities();
-        public ActionResult Index()  //odunc alma 
+        public ActionResult Index()   
         { 
             var degerler = db.TBLHAREKET.ToList();
             return View(degerler);
@@ -25,7 +25,7 @@ namespace MVCKutuphane.Controllers
         {
             db.TBLHAREKET.Add(p);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
