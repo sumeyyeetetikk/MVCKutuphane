@@ -51,5 +51,14 @@ namespace MVCKutuphane.Controllers
 
             return View();
         }
+        public ActionResult HavaRaporu() //RapidApi ile konuma göre hava durumu çek
+
+        {
+            return View();
+        }
+        public ActionResult Galeri()
+        {
+            return View();
+        }
     }
 }

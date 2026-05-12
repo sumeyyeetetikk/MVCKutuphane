@@ -1,4 +1,4 @@
-﻿@model MVCKutuphane.Models.Entity.TBLYAZAR
+﻿ @model MVCKutuphane.Models.Entity.TBLYAZAR
 @{
     ViewBag.Title = "YazarEkle";
     Layout = "~/Views/Shared/Layout.cshtml";
@@ -23,6 +23,7 @@
                         @class = "form-control form-control-lg rounded-4",
                         placeholder = "Yazar adını giriniz..."
                     })
+                    @Html.ValidationMessageFor(y => y.AD)
                 </div>
 
                 <div class="mb-4">
@@ -32,6 +33,7 @@
                         @class = "form-control form-control-lg rounded-4",
                         placeholder = "Yazar soyadını giriniz..."
                     })
+                    @Html.ValidationMessageFor(y => y.SOYAD)
                 </div>
 
                 <div class="mb-4">
