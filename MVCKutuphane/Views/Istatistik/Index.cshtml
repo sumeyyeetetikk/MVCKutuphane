@@ -1,0 +1,318 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+<style>
+    .stat-card {
+        color: white;
+        border-radius: 6px;
+        padding: 28px 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 20px rgba(0,0,0,.12);
+        transition: .3s;
+        min-height: 145px;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .stat-icon {
+        font-size: 45px;
+        opacity: .9;
+        margin-right: 20px;
+    }
+
+    .stat-number {
+        font-size: 38px;
+        font-weight: bold;
+        margin: 0;
+    }
+
+    .stat-title {
+        font-size: 18px;
+        margin-top: 5px;
+    }
+
+    .bg-green {
+        background: #16a085;
+    }
+
+    .bg-red {
+        background: #ef6469;
+    }
+
+    .bg-blue {
+        background: #3498db;
+    }
+
+    .bg-darkblue {
+        background: #34495e;
+    }
+
+    .bg-purple {
+        background: #8e44ad;
+    }
+
+    .bg-orange {
+        background: #f39c12;
+    }
+
+    .bg-pink {
+        background: #e84393;
+    }
+
+    .bg-gray {
+        background: #607d8b;
+    }
+
+    .report-card {
+        background: #eaf7ff;
+        padding: 30px;
+        border-radius: 6px;
+        box-shadow: 0 8px 20px rgba(0,0,0,.08);
+        margin-bottom: 25px;
+    }
+
+    .progress-title {
+        font-size: 17px;
+        margin-bottom: 7px;
+        font-weight: 600;
+    }
+
+    .progress {
+        height: 23px;
+        margin-bottom: 22px;
+        border-radius: 0;
+    }
+
+    .todo-card {
+        background: #fff;
+        border-radius: 6px;
+        box-shadow: 0 8px 20px rgba(0,0,0,.08);
+        margin-bottom: 25px;
+    }
+
+    .todo-header {
+        background: #a5b4fc;
+        color: white;
+        padding: 15px;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .todo-body {
+        padding: 25px;
+    }
+
+    .todo-item {
+        font-size: 17px;
+        margin-bottom: 18px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .map-box {
+        background: #318ca8;
+        padding: 25px;
+        border-radius: 6px;
+        color: white;
+        box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    }
+
+    .map-img {
+        width: 100%;
+        min-height: 320px;
+        object-fit: cover;
+        opacity: .85;
+    }
+</style>
+
+<div class="container-fluid mt-4">
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="stat-card bg-green d-flex align-items-center">
+                <i class="fa-solid fa-dollar-sign stat-icon"></i>
+                <div>
+                    <p class="stat-number">@ViewBag.KasadakiTutar ₺</p>
+                    <div class="stat-title">Kasadaki Tutar</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card bg-red d-flex align-items-center">
+                <i class="fa-solid fa-users stat-icon"></i>
+                <div>
+                    <p class="stat-number">@ViewBag.ToplamUye</p>
+                    <div class="stat-title">Toplam Üye</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card bg-blue d-flex align-items-center">
+                <i class="fa-solid fa-book stat-icon"></i>
+                <div>
+                    <p class="stat-number">@ViewBag.KitapSayisi</p>
+                    <div class="stat-title">Kitap Sayımız</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card bg-darkblue d-flex align-items-center">
+                <i class="fa-solid fa-eye stat-icon"></i>
+                <div>
+                    <p class="stat-number">@ViewBag.EmanetKitapSayisi</p>
+                    <div class="stat-title">Emanet Kitaplar</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="stat-card bg-purple d-flex align-items-center">
+                <i class="fa-solid fa-list stat-icon"></i>
+                <div>
+                    <p class="stat-number">@ViewBag.KategoriSayisi</p>
+                    <div class="stat-title">Kategori Sayısı</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card bg-orange d-flex align-items-center">
+                <i class="fa-solid fa-pen-nib stat-icon"></i>
+                <div>
+                    <p class="stat-number">@ViewBag.YazarSayisi</p>
+                    <div class="stat-title">Yazar Sayısı</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card bg-pink d-flex align-items-center">
+                <i class="fa-solid fa-user-tie stat-icon"></i>
+                <div>
+                    <p class="stat-number">@ViewBag.PersonelSayisi</p>
+                    <div class="stat-title">Personel Sayısı</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="stat-card bg-gray d-flex align-items-center">
+                <i class="fa-solid fa-chart-line stat-icon"></i>
+                <div>
+                    <p class="stat-number">@ViewBag.EnCokOkunanKitap</p>
+                    <div class="stat-title">En Çok Okunan Kitap</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-8">
+            <div class="map-box">
+                <h2>Dünya Haritası</h2>
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Equirectangular_projection_SW.jpg"
+                     class="map-img"
+                     alt="Dünya Haritası" />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="todo-card">
+                <div class="todo-header">
+                    Yapılacak Listesi
+                </div>
+
+                <div class="todo-body">
+                    <div class="todo-item">
+                        <span>Yayınevini ara.</span>
+                        <input type="checkbox" checked />
+                    </div>
+
+                    <div class="todo-item">
+                        <span>Emanet kitaplar için kontrol.</span>
+                        <input type="checkbox" checked />
+                    </div>
+
+                    <div class="todo-item">
+                        <span>Kasayı kontrol et.</span>
+                        <input type="checkbox" checked />
+                    </div>
+
+                    <div class="todo-item">
+                        <span>Haftasonu çalışması.</span>
+                        <input type="checkbox" checked />
+                    </div>
+
+                    <div class="todo-item">
+                        <span>Yeni kitapların girişi.</span>
+                        <input type="checkbox" checked />
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-card">
+                <h2><b>Sistem Raporları</b></h2>
+
+                <div class="progress-title">
+                    Memnuniyet <span class="pull-right">96%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width:96%"></div>
+                </div>
+
+                <div class="progress-title">
+                    Güvenilirlik <span class="pull-right">89%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning" style="width:89%"></div>
+                </div>
+
+                <div class="progress-title">
+                    Haftalık Geri Dönüş <span class="pull-right">76%</span>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" style="width:76%"></div>
+                </div>
+
+                <hr />
+
+                <p>
+                    Kütüphane Yönetim Sistemi projemizin admin paneli kısmındasınız.
+                    Sistem üzerinden kitap, üye, yazar, kategori, emanet ve kasa işlemlerini takip edebilirsiniz.
+                </p>
+
+                <p>
+                    <b>En Aktif Üye:</b> @ViewBag.EnAktifUye
+                </p>
+
+                <p>
+                    <b>En Çok Kitabı Olan Yazar:</b> @ViewBag.EnCokKitabiOlanYazar
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
