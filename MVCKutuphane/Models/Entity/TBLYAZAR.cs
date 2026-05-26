@@ -11,8 +11,7 @@ namespace MVCKutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class TBLYAZAR
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,10 +21,7 @@ namespace MVCKutuphane.Models.Entity
         }
     
         public int ID { get; set; }
-        [Required(ErrorMessage ="Yazar Adý Boþ Geçilemez")]
-
         public string AD { get; set; }
-        [StringLength(20, ErrorMessage ="Soyad 20 Karakterden Uzun Olamaz")]
         public string SOYAD { get; set; }
         public string Detay { get; set; }
     

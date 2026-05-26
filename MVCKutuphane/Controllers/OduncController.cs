@@ -1,4 +1,5 @@
 ﻿using MVCKutuphane.Models.Entity;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,7 +11,7 @@ namespace MVCKutuphane.Controllers
 
         public ActionResult Index()
         {
-            var degerler = db.TBLHAREKET.Where(x=> x.ISLEMDURUM == false).ToList();
+            var degerler = db.TBLHAREKET.Where(x => x.ISLEMDURUM == false).ToList();
             return View(degerler);
         }
 
@@ -33,23 +34,57 @@ namespace MVCKutuphane.Controllers
             return RedirectToAction("Index");
         }
 
+   
         [HttpGet]
         public ActionResult OduncIade(int id)
         {
             var odn = db.TBLHAREKET.Find(id);
+
+ 
+            if (odn.IADETARIH != null)
+            {
+                DateTime d1 = Convert.ToDateTime(odn.IADETARIH);
+                DateTime d2 = DateTime.Today;
+
+                if (d2 > d1)
+                {
+                    TimeSpan d3 = d2 - d1;
+                    ViewBag.dgr = Math.Floor(d3.TotalDays);
+                }
+                else
+                {
+                    ViewBag.dgr = 0; 
+                }
+            }
+
             return View("OduncIade", odn);
         }
+
 
         [HttpPost]
         public ActionResult OduncIade(TBLHAREKET p)
         {
             var hrk = db.TBLHAREKET.Find(p.ID);
 
+      
+            hrk.UYEGETIRTARIH = p.UYEGETIRTARIH;
+            hrk.ISLEMDURUM = true; 
+
+            var kitap = db.TBLKITAP.Find(hrk.KITAP);
+            if (kitap != null)
+            {
+                kitap.DURUM = true;
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult OduncGuncelle(TBLHAREKET p)
+        {
+            var hrk = db.TBLHAREKET.Find(p.ID);
             hrk.UYEGETIRTARIH = p.UYEGETIRTARIH;
             hrk.ISLEMDURUM = true;
 
-            var kitap = db.TBLKITAP.Find(hrk.KITAP);
-            kitap.DURUM = true;
 
             db.SaveChanges();
 
