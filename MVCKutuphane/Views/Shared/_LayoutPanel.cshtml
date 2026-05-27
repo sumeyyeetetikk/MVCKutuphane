@@ -1,0 +1,118 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibDashboard | Öğrenci Paneli</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // Mobil menü açma/kapama fonksiyonu
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('-translate-x-full');
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans antialiased text-gray-800">
+
+    <div class="min-h-screen flex relative overflow-x-hidden">
+
+        <aside id="sidebar" class="w-64 bg-slate-900 text-slate-200 fixed inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col justify-between shadow-xl border-r border-slate-800">
+
+            <div>
+                <div class="h-20 flex items-center px-6 border-b border-slate-800 gap-3 bg-slate-950">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl animate-pulse">
+                        <i class="fa-solid fa-hat-wizard"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg text-white tracking-wide">LibDashboard</h1>
+                        <span class="text-xs text-amber-400 font-medium tracking-widest uppercase">Student Portal</span>
+                    </div>
+                </div>
+
+                <nav class="p-4 space-y-1.5">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-amber-500 text-slate-950 font-semibold transition-all duration-200 shadow-lg shadow-amber-500/10">
+                        <i class="fa-solid fa-chart-pie text-lg w-5"></i>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 hover:text-white transition-all duration-200 text-slate-400 group">
+                        <i class="fa-solid fa-magnifying-glass text-lg w-5 group-hover:text-amber-400 transition-colors"></i>
+                        <span>Profilim</span>
+                    </a>
+
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 hover:text-white transition-all duration-200 text-slate-400 group">
+                        <i class="fa-solid fa-book-bookmark text-lg w-5 group-hover:text-amber-400 transition-colors"></i>
+                        <span>Mesajlar</span>
+                    </a>
+
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 hover:text-white transition-all duration-200 text-slate-400 group">
+                        <i class="fa-solid fa-clock-rotate-left text-lg w-5 group-hover:text-amber-400 transition-colors"></i>
+                        <span>Duyurular</span>
+                    </a>
+
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 hover:text-white transition-all duration-200 text-slate-400 group">
+                        <i class="fa-solid fa-user-gear text-lg w-5 group-hover:text-amber-400 transition-colors"></i>
+                        <span>Kitaplarım</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 hover:text-white transition-all duration-200 text-slate-400 group">
+                        <i class="fa-solid fa-user-gear text-lg w-5 group-hover:text-amber-400 transition-colors"></i>
+                        <span>Vitrin</span>
+                    </a>
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-800 hover:text-white transition-all duration-200 text-slate-400 group">
+                        <i class="fa-solid fa-user-gear text-lg w-5 group-hover:text-amber-400 transition-colors"></i>
+                        <span>Yardım</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="p-4 border-t border-slate-800 bg-slate-950/40">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all duration-200 font-medium">
+                    <i class="fa-solid fa-right-from-bracket text-lg w-5"></i>
+                    <span>Çıkış Yap</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="flex-1 md:pl-64 min-h-screen flex flex-col">
+
+            <header class="h-20 bg-white border-b border-gray-200 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-40 shadow-sm">
+                <button onclick="toggleSidebar()" class="p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 md:hidden focus:outline-none">
+                    <i class="fa-solid fa-bars-staggered text-xl"></i>
+                </button>
+
+                <div class="hidden sm:block">
+                    <h2 class="text-xl font-bold text-slate-800">Hoş geldin, Öğrenci 👋</h2>
+                    <p class="text-xs text-gray-500">Bugün yeni dünyalar keşfetmek için harika bir gün.</p>
+                </div>
+
+                <div class="flex items-center gap-3 ml-auto sm:ml-0">
+                    <div class="text-right hidden xs:block">
+                        <p class="text-sm font-semibold text-slate-800">Sümeyye Nur</p>
+                        <span class="text-xs bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-full font-medium border border-emerald-100">Aktif Üye</span>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-white font-bold shadow-md">
+                        SN
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-4 sm:p-8 space-y-8 flex-1">
+
+            @RenderBody()
+            </div>
+
+            <footer class="p-6 border-t border-gray-200 text-center text-xs text-gray-400 mt-auto bg-white">
+                &copy; 2026 LibDashboard. Tasarım ve Altyapı Entegrasyonu Tarafımdan Yapılmıştır.
+            </footer>
+        </main>
+    </div>
+
+</body>
+</html>
