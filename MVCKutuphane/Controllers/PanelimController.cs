@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVCKutuphane.Models.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,16 @@ namespace MVCKutuphane.Controllers
 {
     public class PanelimController : Controller
     {
-        // GET: Panelim
+        DBKUTUPHANEEntities db = new DBKUTUPHANEEntities();
+
+        [Authorize]
         public ActionResult Index()
         {
-            return View();
+            var uyeMail = User.Identity.Name;
+
+            var uyeBilgisi = db.TBLUYELER.FirstOrDefault(x => x.MAIL == uyeMail);
+
+            return View(uyeBilgisi);
         }
     }
 }

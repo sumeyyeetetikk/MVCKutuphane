@@ -1,8 +1,61 @@
-﻿
+﻿@model MVCKutuphane.Models.Entity.TBLUYELER
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Index</h2>
 
+
+
+<div class="profile-container" style="padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 20px;">
+
+    <div class="profile-header" style="border-bottom: 2px solid #f1f1f1; padding-bottom: 15px; margin-bottom: 20px;">
+        <h2 style="margin: 0; color: #333;"><i class="fa fa-user-circle"></i> Profil Bilgilerim</h2>
+        <p style="margin: 5px 0 0 0; color: #777;">Hesap bilgilerinizi buradan görüntüleyebilir ve güncelleyebilirsiniz.</p>
+    </div>
+
+    <form action="/Panelim/ProfilGuncelle" method="post">
+
+        <input type="hidden" name="ID" value="@Model.ID" />
+
+        <div class="form-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+
+            <div class="form-group">
+                <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #555;">Adınız</label>
+                <input type="text" name="AD" value="@Session["Ad"]" class="form-control" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            </div>
+
+            <div class="form-group">
+                <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #555;">Soyadınız</label>
+                <input type="text" name="SOYAD" value="@Session["Soyad"]" class="form-control" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            </div>
+
+            <div class="form-group">
+                <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #555;">Kullanıcı Adınız</label>
+                <input type="text" name="KULLANICIADI" value="@Session["KullanıcıAdı"]" class="form-control" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            </div>
+
+            <div class="form-group">
+                <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #555;">E-Posta Adresiniz (Giriş Kimliği)</label>
+                <input type="email" name="MAIL" value="@Session["MAIL"]" class="form-control" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            </div>
+
+            <div class="form-group">
+                <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #555;">Şifreniz</label>
+                <input type="text" name="SIFRE" value="@Session["Sıfre"]" class="form-control" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            </div>
+
+            <div class="form-group">
+                <label style="display: block; font-weight: bold; margin-bottom: 8px; color: #555;">Okul / Eğitim Durumu</label>
+                <input type="text" name="OKUL" value="@Session["Okul"]" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" />
+            </div>
+
+        </div>
+
+        <div class="form-actions" style="margin-top: 30px; text-align: right;">
+            <button type="submit" class="btn btn-warning" style="background-color: #ffc107; color: #000; border: none; padding: 12px 25px; font-weight: bold; border-radius: 4px; cursor: pointer; transition: background 0.2s;">
+                <i class="fa fa-save"></i> Bilgilerimi Güncelle
+            </button>
+        </div>
+    </form>
+</div>
