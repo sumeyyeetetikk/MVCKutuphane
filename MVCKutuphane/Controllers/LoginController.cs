@@ -22,12 +22,14 @@ namespace MVCKutuphane.Controllers
             if(bilgiler !=null)
             {
                 FormsAuthentication.SetAuthCookie(bilgiler.MAIL, false);
-                Session["Ad"] = bilgiler.AD.ToString();
-                Session["Soyad"] = bilgiler.SOYAD.ToString();
-                Session["KullanıcıAdı"] = bilgiler.KULLANICIADI.ToString();
-                Session["Sıfre"] = bilgiler.SIFRE.ToString();
-                Session["Okul"] = bilgiler.OKUL.ToString();
                 Session["MAIL"] = bilgiler.MAIL.ToString();
+                //TempData["id"] = bilgiler.ID.ToString();
+                //TempData["Ad"] = bilgiler.AD.ToString();
+                //TempData["Soyad"] = bilgiler.SOYAD.ToString();
+                //TempData["KullanıcıAdı"] = bilgiler.KULLANICIADI.ToString();
+                //TempData["Sıfre"] = bilgiler.SIFRE.ToString();
+                //TempData["Okul"] = bilgiler.OKUL.ToString();
+            
                 return RedirectToAction("Index", "Panelim");
             }
             else 

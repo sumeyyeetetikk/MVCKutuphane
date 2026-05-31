@@ -10,15 +10,28 @@ namespace MVCKutuphane.Controllers
     public class PanelimController : Controller
     {
         DBKUTUPHANEEntities db = new DBKUTUPHANEEntities();
-
+        [HttpGet]
         [Authorize]
         public ActionResult Index()
         {
-            var uyeMail = User.Identity.Name;
+            var uyeMail = (string)Session["MAIL"];
+            var degerler = db.TBLUYELER.FirstOrDefault(x => x.MAIL == uyeMail);
+            return View(degerler);
+        }
 
-            var uyeBilgisi = db.TBLUYELER.FirstOrDefault(x => x.MAIL == uyeMail);
-
-            return View(uyeBilgisi);
+        [HttpPost]
+        public ActionResult Index2(TBLUYELER p)
+        {
+            var kullanici = (string)Session["MAIL"];
+            var uye=db.TBLUYELER.FirstOrDefault(x=>x.MAIL == kullanici);
+            uye.SIFRE = p.SIFRE;
+            uye.AD = p.AD;
+            uye.FOTOGRAF = p.FOTOGRAF;
+            uye.SOYAD= p.SOYAD;
+            uye.OKUL = p.OKUL;
+            uye.KULLANICIADI = p.KULLANICIADI;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
