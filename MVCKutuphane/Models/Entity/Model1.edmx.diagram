@@ -23,6 +23,7 @@
         <AssociationConnector Association="DBKUTUPHANEModel.FK_TBLHAREKET_TBLPERSONEL" />
         <EntityTypeShape EntityType="DBKUTUPHANEModel.TBLHAKKIMIZDA" Width="1.5" PointX="5.375" PointY="7.75" />
         <EntityTypeShape EntityType="DBKUTUPHANEModel.TBLILETISIM" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="DBKUTUPHANEModel.TBLMESAJLAR" Width="1.5" PointX="10" PointY="5.75" />
       </Diagram>
       <Diagram DiagramId="0cd5de7f252c400eb5e6328327bbbd7f" Name="Diagram2" >
         <EntityTypeShape EntityType="DBKUTUPHANEModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />

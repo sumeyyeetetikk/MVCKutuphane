@@ -23,15 +23,22 @@ namespace MVCKutuphane.Controllers
         public ActionResult Index2(TBLUYELER p)
         {
             var kullanici = (string)Session["MAIL"];
-            var uye=db.TBLUYELER.FirstOrDefault(x=>x.MAIL == kullanici);
+            var uye = db.TBLUYELER.FirstOrDefault(x => x.MAIL == kullanici);
             uye.SIFRE = p.SIFRE;
             uye.AD = p.AD;
             uye.FOTOGRAF = p.FOTOGRAF;
-            uye.SOYAD= p.SOYAD;
+            uye.SOYAD = p.SOYAD;
             uye.OKUL = p.OKUL;
             uye.KULLANICIADI = p.KULLANICIADI;
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult Kitaplarim()
+        {
+            var kullanici = (string)Session["MAIL"];
+            var id = db.TBLUYELER.Where(x => x.MAIL == kullanici.ToString()).Select(y => y.ID).FirstOrDefault();
+            var degerler = db.TBLHAREKET.Where(x => x.UYE == id).ToList();
+            return View(degerler);
         }
     }
 }

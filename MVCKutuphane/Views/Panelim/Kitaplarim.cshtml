@@ -1,0 +1,97 @@
+﻿@using MVCKutuphane.Models.Entity
+@model List<TBLHAREKET>
+@{
+    ViewBag.Title = "Kitaplarim";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+
+<div class="books-container" style="padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-top: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+    <div class="books-header" style="border-bottom: 2px solid #f1f1f1; padding-bottom: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h2 style="margin: 0; color: #333; font-size: 22px;"><i class="fa fa-book-reader" style="color: #2a5298; margin-right: 8px;"></i> Kitap Hareketlerim</h2>
+            <p style="margin: 5px 0 0 0; color: #777; font-size: 14px;">Bu zamana kadar kütüphanemizden ödünç aldığınız tüm kitapların listesi.</p>
+        </div>
+        <span class="badge-total" style="background: #2a5298; color: #fff; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: 13px;">
+            Toplam: @Model.Count Kitap
+        </span>
+    </div>
+
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
+            <thead>
+                <tr style="background-color: #f8f9fa; color: #555; border-bottom: 2px solid #eaeaea;">
+                    <th style="padding: 15px 10px;">#</th>
+                    <th style="padding: 15px 10px;">Kitap Adı</th>
+                    <th style="padding: 15px 10px;">Personel</th>
+                    <th style="padding: 15px 10px;"><i class="fa fa-calendar-alt"></i> Alış Tarihi</th>
+                    <th style="padding: 15px 10px;"><i class="fa fa-calendar-check"></i> İade Tarihi (Planlanan)</th>
+                    <th style="padding: 15px 10px; text-align: center;">Durum</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 40px; color: #aaa;">
+                            <i class="fa fa-book" style="font-size: 3rem; margin-bottom: 10px; color: #ddd;"></i>
+                            <p style="margin: 0;">Henüz kütüphanemizden hiçbir kitap ödünç almamışsınız.</p>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    int sayac = 0;
+                    foreach (var item in Model)
+                    {
+                        sayac++;
+                        <tr class="table-row" style="border-bottom: 1px solid #eee; transition: background 0.2s;">
+                            <td style="padding: 15px 10px; font-weight: bold; color: #777;">@sayac</td>
+
+                            <td style="padding: 15px 10px; font-weight: 600; color: #222;">
+                                @item.TBLKITAP.AD
+                            </td>
+
+                            <td style="padding: 15px 10px; color: #555;">
+                                @item.TBLPERSONEL.PERSONEL
+                            </td>
+
+                            <td style="padding: 15px 10px; color: #666;">
+                                @(item.ALISTARIH != null ? Convert.ToDateTime(item.ALISTARIH).ToString("dd.MM.yyyy") : "-")
+                            </td>
+
+                            <td style="padding: 15px 10px; color: #666;">
+                                @(item.IADETARIH != null ? Convert.ToDateTime(item.IADETARIH).ToString("dd.MM.yyyy") : "-")
+                            </td>
+
+                            <td style="padding: 15px 10px; text-align: center;">
+                                @if (item.ISLEMDURUM == true)
+                                {
+                                    <span style="background-color: #f8d7da; color: #721c24; padding: 5px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; display: inline-block;">
+                                        <i class="fa fa-clock"></i> Emanette (Sizde)
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span style="background-color: #d4edda; color: #155724; padding: 5px 12px; border-radius: 4px; font-size: 12px; font-weight: bold; display: inline-block;">
+                                        <i class="fa fa-check-circle"></i> Teslim Edildi
+                                    </span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .table-row:hover {
+        background-color: #fcfdfe;
+    }
+</style>

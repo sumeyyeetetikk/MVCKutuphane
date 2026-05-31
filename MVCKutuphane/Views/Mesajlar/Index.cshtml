@@ -1,0 +1,93 @@
+﻿@using MVCKutuphane.Models.Entity
+@model List<TBLMESAJLAR>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
+
+<div class="messaging-container" style="display: flex; gap: 20px; margin-top: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+
+    <div class="messaging-sidebar" style="flex: 1; min-width: 240px; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); height: fit-content;">
+        <a href="/Panelim/YeniMesaj/" class="btn-new-message" style="display: block; text-align: center; background: #dc3545; color: #fff; padding: 12px; border-radius: 6px; text-decoration: none; font-weight: bold; margin-bottom: 20px; transition: background 0.2s;">
+            <i class="fa fa-paper-plane"></i> Yeni Mesaj Oluştur
+        </a>
+
+        <ul class="message-menu" style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 5px;">
+                <a href="/Panelim/GelenKutusu/" class="menu-item active" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; border-radius: 6px; color: #3b71ca; background: #f0f5ff; text-decoration: none; font-weight: 600;">
+                    <span><i class="fa fa-inbox" style="margin-right: 10px;"></i> Gelen Kutusu</span>
+                    <span class="badge" style="background: #3b71ca; color: #fff; padding: 3px 8px; border-radius: 10px; font-size: 12px;">@Model.Count</span>
+                </a>
+            </li>
+            <li style="margin-bottom: 5px;">
+                <a href="/Panelim/GidenKutusu/" class="menu-item" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; border-radius: 6px; color: #555; text-decoration: none; transition: background 0.2s;">
+                    <span><i class="fa fa-share-square" style="margin-right: 10px;"></i> Giden Kutusu</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="messaging-content" style="flex: 3; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+
+        <div class="content-header" style="border-bottom: 2px solid #f1f1f1; padding-bottom: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+            <h2 style="margin: 0; color: #333; font-size: 22px;"><i class="fa fa-envelope-open-text" style="color: #3b71ca;"></i> Gelen Mesajlar</h2>
+            <span style="color: #777; font-size: 14px;">Toplam <b>@Model.Count</b> mesaj listeleniyor</span>
+        </div>
+
+        <div class="message-list" style="display: flex; flex-direction: column; gap: 10px;">
+
+            @if (Model.Count == 0)
+            {
+                <div style="text-align: center; padding: 40px; color: #aaa;">
+                    <i class="fa fa-folder-open fa-3x" style="margin-bottom: 10px;"></i>
+                    <p>Kutunuzda henüz hiç mesaj bulunmuyor.</p>
+                </div>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <div class="message-row" style="display: flex; align-items: center; padding: 15px; border: 1px solid #eef2f5; border-left: 4px solid #3b71ca; border-radius: 6px; background: #fafbfc; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">
+
+                        <div class="msg-sender" style="flex: 1.5; font-weight: bold; color: #222; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            @item.GONDEREN
+                        </div>
+
+                        <div class="msg-body-preview" style="flex: 4; color: #555; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 15px;">
+                            <span class="msg-subject" style="color: #3b71ca; font-weight: 600;">[@item.KONU]</span>
+                            @item.ICERIK
+                        </div>
+
+                        <div class="msg-date" style="flex: 1; text-align: right; color: #888; font-size: 12px; font-weight: 500;">
+                            @(item.TARIH != null ? Convert.ToDateTime(item.TARIH).ToString("dd MMM yyyy") : "")
+                        </div>
+
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .message-menu .menu-item:hover {
+        background: #f8f9fa;
+        color: #3b71ca !important;
+    }
+
+    .message-row:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        background-color: #f6f9fc !important;
+        border-color: #3b71ca;
+    }
+
+    .btn-new-message:hover {
+        background: #bd2130 !important;
+    }
+</style>
