@@ -59,5 +59,18 @@ namespace MVCKutuphane.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        public ActionResult UyeKitapGecmis(int id)
+        {
+            var uyemail = (string)Session["MAIL"];
+
+            var uye = db.TBLUYELER.Find(id);
+            if (uye != null)
+            {
+                ViewBag.UyeAdi = uye.AD + " " + uye.SOYAD;
+            }
+
+            var ktpgcms = db.TBLHAREKET.Where(x => x.UYE == id).ToList();
+            return View(ktpgcms);
+        }
     }
 }

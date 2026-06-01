@@ -38,6 +38,7 @@
                         <th>Detay</th>
                         <th>Sil</th>
                         <th>Güncelle</th>
+                        <th>Yazarın Kitapları</th>
                     </tr>
                 </thead>
 
@@ -58,6 +59,7 @@
                        { @class = "btn btn-danger", onclick = "return confirm('Silmek İstiyor Musunuz?')" })
                             </td>
                             <td><a href="/Yazar/YazarGetir/@item.ID" class="btn btn-success">Güncelle</a></td>
+                            <td><a href="/Yazar/YazarKitaplar/@item.ID" class="btn btn-warning">Yazarın Kitapları</a></td>
                       
                         </tr>
                     }

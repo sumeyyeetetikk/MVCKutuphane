@@ -50,10 +50,20 @@ namespace MVCKutuphane.Controllers
         {
             var yzr = db.TBLYAZAR.Find(p.ID);
             yzr.AD = p.AD;
-            yzr.SOYAD= p.SOYAD;
+            yzr.SOYAD = p.SOYAD;
             yzr.Detay = p.Detay;
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public ActionResult YazarKitaplar(int id)
+        {
+            var yazar = db.TBLYAZAR.Find(id);
+            if (yazar != null)
+            {
+                ViewBag.yazar = yazar.AD + " " + yazar.SOYAD;
+            }
+            var kitaplar = db.TBLKITAP.Where(x => x.YAZAR == yazar.ID).ToList();
+            return View(kitaplar);
         }
     }
 }
