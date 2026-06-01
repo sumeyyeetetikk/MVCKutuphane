@@ -1,0 +1,59 @@
+﻿@model MVCKutuphane.Models.Entity.TBLDUYURULAR
+@{
+    ViewBag.Title = "YeniDuyuru";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+<div class="container py-5" style="max-width: 700px; font-family: 'Segoe UI', sans-serif;">
+
+    <div class="mb-3">
+        <a href="/Duyuru/Index/" class="btn btn-sm btn-outline-secondary rounded-2">
+            <i class="fas fa-arrow-left"></i> Listeye Geri Dön
+        </a>
+    </div>
+
+    <div class="card shadow border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-dark text-white p-3">
+            <h5 class="mb-0 fw-bold"><i class="fas fa-plus-circle me-2 text-warning"></i>Yeni Duyuru Oluştur</h5>
+        </div>
+
+        <div class="card-body p-4 bg-light">
+            @using (Html.BeginForm("YeniDuyuru", "Duyuru", FormMethod.Post))
+            {
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Duyuru Kategorisi</label>
+                    <select name="KATEGORI" class="form-select border-2" required>
+                        <option value="" disabled selected hidden>Kategori Seçiniz...</option>
+                        <option value="Yeni Kitap">📢 Yeni Kitap</option>
+                        <option value="Kitapları Geciktirmeyin">⚠️ Kitapları Geciktirmeyin</option>
+                        <option value="İletişim">📞 İletişim</option>
+                        <option value="Diğer">🌐 Diğer</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold text-secondary">Duyuru Başlığı</label>
+                    @Html.TextBoxFor(x => x.BASLIK, new { @class = "form-control border-2", @placeholder = "Duyuru başlığını yazın...", @required = "required" })
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold text-secondary">Duyuru İçerik Metni</label>
+                    @Html.TextAreaFor(x => x.ICERIK, new { @class = "form-control border-2", @rows = "5", @placeholder = "Duyuru detaylarını buraya giriniz...", @required = "required" })
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="reset" class="btn btn-secondary px-4">Temizle</button>
+                    <button type="submit" class="btn btn-success px-4 fw-bold">Yayınla</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -39,7 +39,7 @@
                     @using (Html.BeginForm("OduncVer", "Odunc", FormMethod.Post))
                     {
 
-                        <div class="mb-4">
+                        @*<div class="mb-4">
 
                             <label class="form-label fw-semibold">
                                 Kitap ID
@@ -49,10 +49,10 @@
                             new
                             {
                                 @class = "form-control form-control-lg rounded-3",
-                                placeholder = "Kitap ID giriniz"
+                                placeholder = "Kitap ID giriniz"w
                             })
 
-                        </div>
+                        </div>*@
 
                         <div class="mb-4">
 
@@ -60,13 +60,12 @@
                                 Üye ID
                             </label>
 
-                            @Html.TextBoxFor(x => x.UYE,
-                            new
-                            {
-                                @class = "form-control form-control-lg rounded-3",
-                                placeholder = "Üye ID giriniz"
-                            })
+                            @Html.DropDownListFor(x => x.TBLUYELER.ID, (List<SelectListItem>)ViewBag.dgr1, new { @class = "form-control" })
 
+                            <br />
+                           
+
+                            @Html.DropDownListFor(x => x.TBLKITAP.ID, (List<SelectListItem>)ViewBag.dgr2, new { @class = "form-control" })
                         </div>
 
                         <div class="mb-4">
@@ -75,12 +74,7 @@
                                 Personel ID
                             </label>
 
-                            @Html.TextBoxFor(x => x.PERSONEL,
-                            new
-                            {
-                                @class = "form-control form-control-lg rounded-3",
-                                placeholder = "Personel ID giriniz"
-                            })
+                            @Html.DropDownListFor(x => x.TBLPERSONEL.ID, (List<SelectListItem>)ViewBag.dgr3, new { @class = "form-control" })
 
                         </div>
 
