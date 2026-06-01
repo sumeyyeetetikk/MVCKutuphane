@@ -8,6 +8,7 @@ using System.Web.Security;
 
 namespace MVCKutuphane.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
        DBKUTUPHANEEntities db = new DBKUTUPHANEEntities();
