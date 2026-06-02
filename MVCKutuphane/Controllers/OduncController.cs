@@ -9,7 +9,7 @@ namespace MVCKutuphane.Controllers
     public class OduncController : Controller
     {
         DBKUTUPHANEEntities db = new DBKUTUPHANEEntities();
-
+        [Authorize(Roles = "A")]
         public ActionResult Index()
         {
             var degerler = db.TBLHAREKET.Where(x => x.ISLEMDURUM == false).ToList();
