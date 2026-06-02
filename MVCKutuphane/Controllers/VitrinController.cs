@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MVCKutuphane.Controllers
 {
+    [AllowAnonymous]
     public class VitrinController : Controller
     {
         DBKUTUPHANEEntities db = new DBKUTUPHANEEntities();
