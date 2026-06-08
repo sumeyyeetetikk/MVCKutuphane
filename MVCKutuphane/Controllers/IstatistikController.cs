@@ -1,8 +1,11 @@
 ﻿using MVCKutuphane.Models.Entity;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -52,11 +55,56 @@ namespace MVCKutuphane.Controllers
 
             return View();
         }
-        public ActionResult HavaRaporu() //RapidApi ile konuma göre hava durumu çek
-
+        [HttpGet]
+        public async Task<ActionResult> HavaRaporu(string sehir)
         {
+          
+            if (string.IsNullOrEmpty(sehir))
+            {
+                sehir = "Istanbul";
+            }
+
+            var client = new HttpClient();
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+              
+                RequestUri = new Uri($"https://weather-api167.p.rapidapi.com/api/weather/forecast?place={sehir}%2CTR&cnt=3&units=metric&lang=tr"),
+                Headers =
+                {
+                    { "x-rapidapi-host", "weather-api167.p.rapidapi.com" },
+                    { "x-rapidapi-key", "SENIN_RAPID_API_KEYIN" }, // Kendi RapidAPI anahtarını buraya yaz
+                    { "Accept", "application/json" },
+                },
+            };
+
+            try
+            {
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    var body = await response.Content.ReadAsStringAsync();
+
+                    var data = JObject.Parse(body);
+
+                  
+                    ViewBag.SecilenSehir = sehir;
+                    ViewBag.SehirAdi = data["city"]["name"]?.ToString();
+                    ViewBag.Derece = data["list"]?[0]?["main"]?["temp"]?.ToString();
+                    ViewBag.Durum = data["list"]?[0]?["weather"]?[0]?["description"]?.ToString();
+                }
+            }
+            catch (Exception)
+            {
+                ViewBag.SehirAdi = sehir + " (Hata oluştu)";
+                ViewBag.Derece = "--";
+                ViewBag.Durum = "Veri alınamadı.";
+            }
+
             return View();
         }
+    
+
         public ActionResult Galeri()
         {
             return View();
@@ -79,7 +127,7 @@ namespace MVCKutuphane.Controllers
             var deger3= db.TBLCEZALAR.Sum(x=>x.PARA);
             var deger4= db.TBLKITAP.Where(x=>x.DURUM == false).Count();
             var deger5= db.EnFazlaKitapYazar().FirstOrDefault();
-            var deger6= db.TBLKITAP.GroupBy(x=>x.YAYIMEVI).OrderByDescending(z=>z.Count()).Select(y=> new {y.Key}).FirstOrDefault();
+            var deger6= db.TBLKITAP.GroupBy(x=>x.YAYIMEVI).OrderByDescending(z=>z.Count()).Select(y=>  y.Key).FirstOrDefault();
             var deger7 = db.TBLHAREKET.GroupBy(x => x.TBLPERSONEL.PERSONEL).OrderByDescending(x => x.Count()).Select(x => x.Key).FirstOrDefault();
             DateTime bugun = DateTime.Today;
             var deger8 = db.TBLHAREKET.Where(x => System.Data.Entity.DbFunctions.TruncateTime(x.ALISTARIH) == bugun).Count();

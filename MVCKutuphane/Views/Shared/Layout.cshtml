@@ -164,30 +164,24 @@
             <i class="fa-solid fa-user-tie"></i>
             <span>Personeller</span>
         </a>
-
+        @if (User.IsInRole("A"))
+        {
         <a href="/Odunc/Index">
             <i class="fa-solid fa-hand-holding-hand"></i>
-            <span>Ödünç Kitap Ver</span>
+            <span>Kitap Ödünç İşlemleri</span>
         </a>
-        <a href="/Odunc/Index">
-            <i class="fa-solid fa-hand-holding-hand"></i>
-            <span>Ödünç Kitap Al</span>
-        </a>
+        
+        }
         <a href="/Islem/Index">
             <i class="fa-solid fa-hand-holding-hand"></i>
             <span>İşlemler</span>
         </a>
 
-        <a href="/Ceza/Index">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-            <span>Cezalar</span>
-        </a>
-
         <a href="/Duyuru/Index">
-            <i class="glyphicon glyphicon-earphone"></i>
+            <i class="fa-star-of-life fa-sad-tear"></i>
             <span>Duyurular</span>
         </a>
-        <a href="/Kasa/Index">
+        <a href="/HavaDurumu/Index">
             <i class="fa-solid fa-wallet"></i>
             <span>Hava Durumu</span>
         </a>
@@ -199,11 +193,6 @@
         <a href="/Istatistik/Galeri">
             <i class="fa-solid fa-chart-pie"></i>
             <span>Galeri</span>
-        </a>
-
-        <a href="/Istatistik/LinqKart">
-            <i class="fa-solid fa-caret-down"></i>
-            <span>Linq Kartlar</span>
         </a>
 
         <a href="/Istatistik/LinqKart">
@@ -241,7 +230,7 @@
                 <button class="btn btn-light position-relative rounded-circle">
                     <i class="fa-solid fa-bell"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        3
+                        
                     </span>
                 </button>
 

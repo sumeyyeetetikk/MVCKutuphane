@@ -140,6 +140,7 @@
     <Compile Include="Controllers\DuyuruController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GrafikController.cs" />
+    <Compile Include="Controllers\HavaDurumuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IslemController.cs" />
     <Compile Include="Controllers\IstatistikController.cs" />
@@ -576,6 +577,7 @@
     <Content Include="Views\Error\Page404.cshtml" />
     <Content Include="Views\Ayarlar\Index.cshtml" />
     <Content Include="Views\Ayarlar\AdminGüncelle.cshtml" />
+    <Content Include="Views\HavaDurumu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

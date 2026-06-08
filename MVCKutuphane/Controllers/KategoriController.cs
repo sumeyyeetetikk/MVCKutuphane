@@ -24,9 +24,10 @@ namespace MVCKutuphane.Controllers
         [HttpPost]
         public ActionResult CreateCategory(TBLKATEGORI p)
         {
+            p.DURUM = true;
             db.TBLKATEGORI.Add(p);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Index");
         }
         public ActionResult Sil(int id)
         {

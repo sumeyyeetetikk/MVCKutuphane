@@ -12,6 +12,7 @@ namespace MVCKutuphane.Controllers
         DBKUTUPHANEEntities db = new DBKUTUPHANEEntities();
         public ActionResult Index()
         {
+
             var uyemail=(string)Session["MAIL"].ToString();
             var mesajlar = db.TBLMESAJLAR.Where(x => x.ALICI == uyemail.ToString()).ToList();
             return View(mesajlar);

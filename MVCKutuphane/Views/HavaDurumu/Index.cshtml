@@ -1,9 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "HavaRaporu";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Layout.cshtml";
 }
-
 
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -14,7 +13,7 @@
         <div class="col-md-6 col-lg-5">
 
             <div class="card border-0 shadow-sm p-4 mb-4 rounded-4 bg-white">
-                <h5 class="fw-bold mb-3 text-secondary"><i class="fas fa-search-location me-2"></i> Şehir Filtrele</h5>
+                <h6 class="fw-bold mb-3 text-secondary"><i class="fas fa-globe-europe text-primary me-2"></i> Şehir Seçimi</h6>
 
                 @using (Html.BeginForm("Index", "HavaDurumu", FormMethod.Get))
                 {
@@ -36,23 +35,21 @@
             </div>
 
             <div class="card border-0 shadow-lg text-white rounded-4 overflow-hidden"
-                 style="background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);">
+                 style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);">
 
                 <div class="card-body p-5 text-center">
-                    <h3 class="fw-bold mb-1"><i class="fas fa-cloud-sun text-warning me-2"></i> @ViewBag.SehirAdi</h3>
-                    <p class="text-white-50 small">Seçilen Şehrin Anlık Raporu</p>
+                    <h3 class="fw-bold mb-1 text-uppercase"><i class="fas fa-cloud-sun text-warning me-2"></i> @ViewBag.SehirAdi</h3>
+                    <p class="text-white-50 small mb-4">Anlık Hava Tahmin Raporu</p>
 
-                    <h1 class="display-2 fw-bold my-3">
-                        @(ViewBag.Derece != null ? Math.Round(Convert.ToDouble(ViewBag.Derece)) : "--")°C
-                    </h1>
+                    <h1 class="display-1 fw-bold my-3">@ViewBag.Derece°C</h1>
 
-                    <span class="badge bg-white bg-opacity-25 rounded-pill px-4 py-2 text-capitalize fw-semibold" style="font-size: 14px; letter-spacing: 0.5px;">
+                    <span class="badge bg-white bg-opacity-25 rounded-pill px-4 py-2 text-capitalize fw-semibold mt-2" style="font-size: 14px;">
                         @ViewBag.Durum
                     </span>
                 </div>
 
                 <div class="card-footer bg-black bg-opacity-10 border-0 p-3 text-center text-white-50 small">
-                    Kütüphane Otomasyonu Hava Durumu Modülü
+                    Weather API Entegrasyonu Başarılı
                 </div>
 
             </div>
@@ -61,10 +58,3 @@
     </div>
 </div>
 
-<style>
-    /* Estetik odaklanma çizgisi fix */
-    .form-select:focus {
-        border-color: #3498db !important;
-        box-shadow: none !important;
-    }
-</style>
