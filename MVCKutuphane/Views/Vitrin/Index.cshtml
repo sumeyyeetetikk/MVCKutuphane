@@ -1,11 +1,54 @@
-﻿@model MVCKutuphane.Models.Sınıflarım.Class1
+﻿@model MVCKutuphane.Models.Sınıflarım.VitrinViewModel
+@using PagedList
+@using PagedList.Mvc
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    #aiChatButton {
+        position: fixed;
+        right: 25px;
+        bottom: 25px;
+        width: 60px;
+        height: 60px;
+        border: none;
+        border-radius: 50%;
+        background: #1abc9c;
+        color: white;
+        font-size: 28px;
+        cursor: pointer;
+        z-index: 9999;
+        box-shadow: 0 6px 20px rgba(0,0,0,.3);
+    }
 
+    .ai-modal-content {
+        border-radius: 18px;
+        overflow: hidden;
+        border: none;
+    }
+
+    .ai-modal-header {
+        background: #1abc9c;
+        color: white;
+    }
+
+    .ai-modal-body {
+        min-height: 300px;
+    }
+
+    .ai-result {
+        margin-top: 15px;
+        padding: 15px;
+        border: 1px solid #1abc9c;
+        border-radius: 10px;
+        max-height: 350px;
+        overflow-y: auto;
+        white-space: normal;
+    }
+</style>
 <head>
 
     <meta charset="utf-8">
@@ -80,13 +123,14 @@
     </header>
 
     <!-- Portfolio Section -->
+    <!-- Portfolio Section -->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
 
-            <!-- Portfolio Section Heading -->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">KITAPLARIMIZ</h2>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">
+                KITAPLARIMIZ
+            </h2>
 
-            <!-- Icon Divider -->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
                 <div class="divider-custom-icon">
@@ -95,14 +139,30 @@
                 <div class="divider-custom-line"></div>
             </div>
 
-            <!-- Portfolio Grid Items -->
-            <div class="row">
+            <!-- Kategori Filtreleme -->
+            <div class="text-center mb-5">
+                <a href="/Vitrin/Index#portfolio" class="btn btn-outline-primary m-1">
+                    Tüm Kitaplar
+                </a>
 
-                <!-- Portfolio Item 1 -->
-                @foreach (var x in Model.Deger1)
+                @foreach (var kategori in ViewBag.Kategoriler)
+                {
+                    <a href="/Vitrin/Index?kategoriId=@kategori.ID#portfolio"
+                       class="btn btn-outline-primary m-1">
+                        @kategori.AD
+                    </a>
+                }
+            </div>
+
+            <!-- Kitaplar -->
+            <div class="row">
+                @foreach (var x in Model.Kitaplar)
                 {
                     <div class="col-md-6 col-lg-4">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal@(x.ID)">
+                        <div class="portfolio-item mx-auto"
+                             data-toggle="modal"
+                             data-target="#portfolioModal@(x.ID)">
+
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">
                                     <i class="fas fa-plus fa-3x"></i>
@@ -117,40 +177,21 @@
                     </div>
                 }
             </div>
-            <!-- /.row -->
+
+            <!-- Sayfalama -->
+            <div class="text-center mt-4">
+                @Html.PagedListPager(
+                    Model.Kitaplar,
+                    sayfa => Url.Action("Index", new
+                    {
+                        sayfa,
+                        kategoriId = ViewBag.SeciliKategori
+                    }) + "#portfolio"
+                )
+            </div>
 
         </div>
     </section>
-
-    <!-- About Section -->
-    <section class="page-section bg-primary text-white mb-0" id="about">
-        <div class="container">
-
-            <!-- About Section Heading -->
-            <h2 class="page-section-heading text-center text-uppercase text-white">HAKKIMIZDA</h2>
-
-            <!-- Icon Divider -->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon">
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="divider-custom-line"></div>
-            </div>
-
-            <!-- About Section Content -->
-            <div class="row">
-                @foreach (var x in Model.Deger2)
-                {
-                    @x.AÇIKLAMA
-                }
-            </div>
-
-
-
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section class="page-section" id="contact">
         <div class="container">
@@ -216,43 +257,54 @@
         </div>
     </section>
 
+
+
+
+    <!-- Footer -->
     <!-- Footer -->
     <footer class="footer text-center">
         <div class="container">
             <div class="row">
 
-                <!-- Footer Location -->
+                <!-- İletişim -->
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">Location</h4>
+                    <h4 class="text-uppercase mb-4">İletişim</h4>
                     <p class="lead mb-0">
-                        2215 John Daniel Drive
-                        <br>Clark, MO 65243
+                        İstanbul, Türkiye
+                        <br>
+                        kutuphane@ornek.com
                     </p>
                 </div>
 
-                <!-- Footer Social Icons -->
+                <!-- Sosyal Medya -->
                 <div class="col-lg-4 mb-5 mb-lg-0">
-                    <h4 class="text-uppercase mb-4">Around the Web</h4>
+                    <h4 class="text-uppercase mb-4">Bizi Takip Edin</h4>
+
                     <a class="btn btn-outline-light btn-social mx-1" href="#">
                         <i class="fab fa-fw fa-facebook-f"></i>
                     </a>
+
                     <a class="btn btn-outline-light btn-social mx-1" href="#">
-                        <i class="fab fa-fw fa-twitter"></i>
+                        <i class="fab fa-fw fa-instagram"></i>
                     </a>
+
                     <a class="btn btn-outline-light btn-social mx-1" href="#">
                         <i class="fab fa-fw fa-linkedin-in"></i>
                     </a>
+
                     <a class="btn btn-outline-light btn-social mx-1" href="#">
-                        <i class="fab fa-fw fa-dribbble"></i>
+                        <i class="fab fa-fw fa-github"></i>
                     </a>
                 </div>
 
-                <!-- Footer About Text -->
+                <!-- Hakkımızda -->
                 <div class="col-lg-4">
-                    <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                    <h4 class="text-uppercase mb-4">Kütüphane Dünyası</h4>
                     <p class="lead mb-0">
-                        Freelance is a free to use, MIT licensed Bootstrap theme created by
-                        <a href="http://startbootstrap.com">Start Bootstrap</a>.
+                        Kütüphane Dünyası, kitap severleri binlerce eserle buluşturan
+                        modern bir kütüphane otomasyon sistemidir. Kitapları
+                        keşfedebilir, detaylarını inceleyebilir ve yapay zeka destekli
+                        öneriler alabilirsiniz.
                     </p>
                 </div>
 
@@ -260,10 +312,11 @@
         </div>
     </footer>
 
-    <!-- Copyright Section -->
     <section class="copyright py-4 text-center text-white">
         <div class="container">
-            <small>Copyright &copy; Your Website 2019</small>
+            <small>
+                © @DateTime.Now.Year Kütüphane Dünyası | Tüm Hakları Saklıdır.
+            </small>
         </div>
     </section>
 
@@ -276,7 +329,7 @@
 
     <!-- Portfolio Modals -->
     <!-- Portfolio Modal 1 -->
-    @foreach (var x in Model.Deger1)
+    @foreach (var x in Model.Kitaplar)
     {
         <div class="portfolio-modal modal fade" id="portfolioModal@(x.ID)" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
@@ -359,6 +412,82 @@
 
     <!-- Custom scripts for this template -->
     <script src="~/web/js/freelancer.min.js"></script>
+
+
+    <script>
+        function toggleAiChat() {
+            var chatBox = document.getElementById("aiChatBox");
+
+            if (chatBox.style.display === "none" || chatBox.style.display === "") {
+                chatBox.style.display = "block";
+            } else {
+                chatBox.style.display = "none";
+            }
+        }
+
+        function aiOneriAl() {
+            var ruhHali = $("#ruhHali").val();
+
+            if (ruhHali.trim() === "") {
+                $("#aiResult").html("Lütfen nasıl hissettiğini yaz 😊");
+                return;
+            }
+
+            $("#aiResult").html("🤖 Kitap danışmanın düşünüyor...");
+
+            $.ajax({
+                url: "/Vitrin/OneriGetir",
+                type: "POST",
+                data: { ruhHali: ruhHali },
+                success: function (response) {
+                    if (response.success) {
+                        $("#aiResult").html(response.cevap.replace(/\n/g, "<br>"));
+                    } else {
+                        $("#aiResult").html(response.message);
+                    }
+                },
+                error: function () {
+                    $("#aiResult").html("Bir hata oluştu. Lütfen tekrar dene.");
+                }
+            });
+        }
+    </script>
+
+    <button id="aiChatButton" data-toggle="modal" data-target="#aiModal">
+        🤖
+    </button>
+
+    <div class="modal fade" id="aiModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content ai-modal-content">
+
+                <div class="modal-header ai-modal-header">
+                    <h5 class="modal-title">AI Kitap Danışmanı</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body ai-modal-body">
+                    <p>Bugün nasıl hissediyorsun? Sana uygun kitap önerebilirim 😊</p>
+
+                    <div id="aiResult" class="ai-result">
+                        Henüz öneri alınmadı.
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <input type="text" id="ruhHali" class="form-control"
+                           placeholder="Örn: Güneşli bir günde sahilde okuyacak kitap...">
+
+                    <button class="btn btn-primary" onclick="aiOneriAl()">
+                        Gönder
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </body>
 
