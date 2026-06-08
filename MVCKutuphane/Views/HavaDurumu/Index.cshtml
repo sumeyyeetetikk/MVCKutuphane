@@ -5,56 +5,155 @@
 }
 
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-<div class="container py-5" style="font-family: 'Segoe UI', sans-serif;">
+<div class="container py-5" style="font-family: 'Poppins', sans-serif;">
     <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-5">
+        <div class="col-md-8 col-lg-6">
 
-            <div class="card border-0 shadow-sm p-4 mb-4 rounded-4 bg-white">
-                <h6 class="fw-bold mb-3 text-secondary"><i class="fas fa-globe-europe text-primary me-2"></i> Şehir Seçimi</h6>
+            <div class="card border-0 shadow-lg p-4 mb-4 rounded-4" style="background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="bg-primary bg-opacity-10 p-2 rounded-3 me-3">
+                        <i class="fas fa-map-marked-alt text-primary fs-4"></i>
+                    </div>
+                    <div>
+                        <h5 class="fw-bold mb-0 text-dark">Şehir Keşfet</h5>
+                        <small class="text-muted">Kütüphane paneli için şehir seçin</small>
+                    </div>
+                </div>
 
                 @using (Html.BeginForm("Index", "HavaDurumu", FormMethod.Get))
                 {
                     <div class="d-flex gap-2">
-                        <select name="sehir" class="form-select border-2 fw-semibold text-secondary" style="border-color: #dee2e6;">
-                            <option value="Istanbul" @(ViewBag.SecilenSehir == "Istanbul" ? "selected" : "")>İstanbul</option>
-                            <option value="Ankara" @(ViewBag.SecilenSehir == "Ankara" ? "selected" : "")>Ankara</option>
-                            <option value="Izmir" @(ViewBag.SecilenSehir == "Izmir" ? "selected" : "")>İzmir</option>
-                            <option value="Yalova" @(ViewBag.SecilenSehir == "Yalova" ? "selected" : "")>Yalova</option>
-                            <option value="Bursa" @(ViewBag.SecilenSehir == "Bursa" ? "selected" : "")>Bursa</option>
-                            <option value="Antalya" @(ViewBag.SecilenSehir == "Antalya" ? "selected" : "")>Antalya</option>
+                        
+
+                        <select name="sehir" class="form-select border-2 fw-semibold text-secondary py-2" style="border-color: #cbd5e1; border-radius: 10px;">
+                            @if (ViewBag.SehirlerListesi != null)
+                            {
+                                foreach (var il in (List<string>)ViewBag.SehirlerListesi)
+                                {
+                                    <option value="@il" @(ViewBag.SecilenSehir == il ? "selected" : "")>📍 @il</option>
+                                }
+                            }
                         </select>
 
-                        <button type="submit" class="btn btn-primary px-4 fw-bold shadow-sm">
-                            Sorgula
+                        <button type="submit" class="btn btn-primary px-4 fw-bold shadow-sm text-white" style="border-radius: 10px; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); border: none;">
+                            <i class="fas fa-sync-alt me-1"></i> Sorgula
                         </button>
                     </div>
                 }
             </div>
 
-            <div class="card border-0 shadow-lg text-white rounded-4 overflow-hidden"
-                 style="background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);">
+            <div class="card border-0 shadow-lg text-white rounded-4 overflow-hidden main-weather-card">
 
-                <div class="card-body p-5 text-center">
-                    <h3 class="fw-bold mb-1 text-uppercase"><i class="fas fa-cloud-sun text-warning me-2"></i> @ViewBag.SehirAdi</h3>
-                    <p class="text-white-50 small mb-4">Anlık Hava Tahmin Raporu</p>
-
-                    <h1 class="display-1 fw-bold my-3">@ViewBag.Derece°C</h1>
-
-                    <span class="badge bg-white bg-opacity-25 rounded-pill px-4 py-2 text-capitalize fw-semibold mt-2" style="font-size: 14px;">
-                        @ViewBag.Durum
+                <div class="card-body p-5 text-center position-relative z-1">
+                    <span class="badge bg-white bg-opacity-20 text-white px-3 py-2 rounded-pill mb-3 fw-medium" style="backdrop-filter: blur(5px);">
+                        <i class="far fa-calendar-alt me-1"></i> @DateTime.Now.ToString("dd MMMM yyyy, dddd")
                     </span>
+
+                    <h2 class="fw-bold mb-1 text-uppercase tracking-wide">
+                        @ViewBag.SehirAdi
+                    </h2>
+
+                    <div class="my-4 display-container d-flex align-items-center justify-content-center gap-3">
+                        <i class="fas fa-cloud-sun-rain display-2 text-warning weather-animate"></i>
+                        <h1 class="display-1 fw-extrabold mb-0" style="font-size: 5.5rem; letter-spacing: -2px;">
+                            @ViewBag.Derece°<span style="font-size: 3.5rem; font-weight: 300;">C</span>
+                        </h1>
+                    </div>
+
+                    <div class="mb-4">
+                        <span class="badge bg-warning text-dark rounded-pill px-4 py-2 text-capitalize fw-bold shadow-sm" style="font-size: 14px; letter-spacing: 0.5px;">
+                            @ViewBag.Durum
+                        </span>
+                    </div>
+
+                    <hr class="hr-light my-4 bg-white opacity-20">
+
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="p-3 bg-white bg-opacity-10 rounded-3 text-start d-flex align-items-center gap-3" style="backdrop-filter: blur(5px);">
+                                <i class="fas fa-tint text-info fs-3"></i>
+                                <div>
+                                    <small class="text-white-50 d-block">Durum</small>
+                                    <span class="fw-bold">Aktif</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-3 bg-white bg-opacity-10 rounded-3 text-start d-flex align-items-center gap-3" style="backdrop-filter: blur(5px);">
+                                <i class="fas fa-wind text-light fs-3"></i>
+                                <div>
+                                    <small class="text-white-50 d-block">Lokasyon</small>
+                                    <span class="fw-bold">TR</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="card-footer bg-black bg-opacity-10 border-0 p-3 text-center text-white-50 small">
-                    Weather API Entegrasyonu Başarılı
+                <div class="card-footer bg-black bg-opacity-20 border-0 p-3 text-center text-white-50 small" style="font-weight: 300;">
+                    <i class="fas fa-code-branch me-1"></i> Kütüphane Otomasyonu & Weather API Entegrasyonu
                 </div>
-
             </div>
 
         </div>
     </div>
 </div>
 
+<style>
+    /* Canlı Gökyüzü Geçiş Efekti (Neon Canlı Mavi-Mor Gradyan) */
+    .main-weather-card {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
+        box-shadow: 0 20px 40px rgba(30, 60, 114, 0.3) !important;
+        position: relative;
+    }
+
+        /* Arka plana hafif bir derinlik katmak için parlama efekti */
+        .main-weather-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+    .tracking-wide {
+        letter-spacing: 1px;
+    }
+
+    .fw-extrabold {
+        font-weight: 700;
+    }
+
+    /* Seçim kutusuna odaklanıldığında neon mavi çizgi parlaması */
+    .form-select:focus {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15) !important;
+    }
+
+    /* Hava durumu ikonuna küçük bir canlılık/dalgalanma hareketi */
+    .weather-animate {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    @@keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-8px);
+        }
+
+        100% {
+            transform: translateY(0px);
+        }
+    }
+</style>

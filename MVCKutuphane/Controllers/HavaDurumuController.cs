@@ -14,7 +14,23 @@ namespace MVCKutuphane.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(string sehir)
         {
-            // İlk açılışta boş kalmasın, varsayılan olarak İstanbul gelsin
+            // 1. Türkiye'nin 81 İlini Alfabetik Olarak Diziye Alıyoruz
+            var turkiyeSehirleri = new List<string>
+    {
+        "Adana", "Adiyaman", "Afyonkarahisar", "Agri", "Aksaray", "Amasya", "Ankara", "Antalya", "Ardahan", "Artvin",
+        "Aydin", "Balikesir", "Bartin", "Batman", "Bayburt", "Bilecik", "Bingol", "Bitlis", "Bolu", "Burdur",
+        "Bursa", "Canakkale", "Cankiri", "Corum", "Denizli", "Diyarbakir", "Duzce", "Edirne", "Elazig", "Erzincan",
+        "Erzurum", "Eskisehir", "Gaziantep", "Giresun", "Gumushane", "Hakkari", "Hatay", "Igdir", "Isparta", "Istanbul",
+        "Izmir", "Kahramanmaras", "Karabuk", "Karaman", "Kars", "Kastamonu", "Kayseri", "Kilis", "Kirikkale", "Kirklareli",
+        "Kirsehir", "Kocaeli", "Konya", "Kutahya", "Malatya", "Manisa", "Mardin", "Mersin", "Mugla", "Mus",
+        "Nevsehir", "Nigde", "Ordu", "Osmaniye", "Rize", "Sakarya", "Samsun", "Sanliurfa", "Siirt", "Sinop",
+        "Sivas", "Sirnak", "Tekirdag", "Tokat", "Trabzon", "Tunceli", "Usak", "Van", "Yalova", "Yozgat", "Zonguldak"
+    };
+
+            // View tarafında dönebilmek için ViewBag'e listeyi veriyoruz
+            ViewBag.SehirlerListesi = turkiyeSehirleri;
+
+            // Varsayılan şehir kontrolü
             if (string.IsNullOrEmpty(sehir))
             {
                 sehir = "Istanbul";
@@ -24,14 +40,13 @@ namespace MVCKutuphane.Controllers
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                // Görseldeki parametrelere sadık kalarak URL'i dinamik yaptık
                 RequestUri = new Uri($"https://weather-api167.p.rapidapi.com/api/weather/forecast?place={sehir.ToLower()}&cnt=3&units=standard&type=three_hour&mode=json&lang=en"),
                 Headers =
-                {
-                    { "x-rapidapi-host", "weather-api167.p.rapidapi.com" },
-                    { "x-rapidapi-key", "6928a9569dmsh0f5351a0ba61f4ep1ba581jsnbe16e836a03a" }, // Kod panelinden veya networkten aldığın key
-                    { "Accept", "application/json" },
-                },
+        {
+            { "x-rapidapi-host", "weather-api167.p.rapidapi.com" },
+            { "x-rapidapi-key", "6928a9569dmsh0f5351a0ba61f4ep1ba581jsnbe16e836a03a" }, 
+            { "Accept", "application/json" },
+        },
             };
 
             try
@@ -42,30 +57,27 @@ namespace MVCKutuphane.Controllers
                     var body = await response.Content.ReadAsStringAsync();
                     var data = JObject.Parse(body);
 
-                    // Seçilen şehri dropdown'da korumak için ViewBag'e atıyoruz
                     ViewBag.SecilenSehir = sehir;
                     ViewBag.SehirAdi = data["city"]?["name"]?.ToString();
 
-                    // Görseldeki JSON ağacına göre: list -> 0. eleman -> main -> temprature
                     var kelvinTemp = Convert.ToDouble(data["list"]?[0]?["main"]?["temprature"]);
-
-                    // Kelvin'den Santigrat'a çevrim yapıyoruz ve yuvarlıyoruz
                     var celsiusTemp = kelvinTemp - 273.15;
                     ViewBag.Derece = Math.Round(celsiusTemp).ToString();
 
-                    // Görseldeki JSON ağacına göre durum açıklaması: list -> 0. eleman -> weather -> 0. eleman -> description
                     ViewBag.Durum = data["list"]?[0]?["weather"]?[0]?["description"]?.ToString();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ViewBag.SecilenSehir = sehir;
-                ViewBag.SehirAdi = sehir + " (Bağlantı Hatası)";
+                ViewBag.SehirAdi = sehir + " (Hata)";
                 ViewBag.Derece = "--";
-                ViewBag.Durum = "Hava durumu verisi çözümlenemedi.";
+                ViewBag.Durum = "Hava durumu verisi alınamadı.";
             }
 
             return View();
         }
     }
 }
+
+

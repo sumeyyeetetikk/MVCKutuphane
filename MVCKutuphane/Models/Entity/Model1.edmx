@@ -104,6 +104,7 @@
           <Property Name="DURUM" Type="bit" />
           <Property Name="YAYIMEVI" Type="varchar" MaxLength="50" />
           <Property Name="KITAPRESIM" Type="nvarchar(max)" />
+          <Property Name="DETAY" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="TBLMESAJLAR">
           <Key>
@@ -370,6 +371,7 @@
           <NavigationProperty Name="TBLYAZAR" Relationship="Self.FK_TBLKITAP_TBLYAZAR" FromRole="TBLKITAP" ToRole="TBLYAZAR" />
           <Property Name="YAYIMEVI" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="KITAPRESIM" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DETAY" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="TBLPERSONEL">
           <Key>
@@ -661,6 +663,7 @@
           <EntitySetMapping Name="TBLKITAP">
             <EntityTypeMapping TypeName="DBKUTUPHANEModel.TBLKITAP">
               <MappingFragment StoreEntitySet="TBLKITAP">
+                <ScalarProperty Name="DETAY" ColumnName="DETAY" />
                 <ScalarProperty Name="KITAPRESIM" ColumnName="KITAPRESIM" />
                 <ScalarProperty Name="YAYIMEVI" ColumnName="YAYIMEVI" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
