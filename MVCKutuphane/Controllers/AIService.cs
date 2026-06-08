@@ -11,7 +11,7 @@ namespace MVCKutuphane.Controllers
 {
     public class AIService
     {
-        private readonly string _apiKey = "AQ.Ab8RN6LxIRd5aRqlAUyg_1PsRw3qjfSQmnTAMslWgXXYTmnToA"; // Buraya API anahtarını koyacaksın
+        private readonly string _apiKey = "Your_ApiKey"; // Buraya API anahtarını koyacaksın
 
         // Bu satırı şu şekilde değiştirip dene:
         private readonly string _apiUrl ="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=";

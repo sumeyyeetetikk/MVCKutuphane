@@ -44,7 +44,7 @@ namespace MVCKutuphane.Controllers
                 Headers =
         {
             { "x-rapidapi-host", "weather-api167.p.rapidapi.com" },
-            { "x-rapidapi-key", "6928a9569dmsh0f5351a0ba61f4ep1ba581jsnbe16e836a03a" }, 
+            { "x-rapidapi-key", "Your_ApiKey" }, 
             { "Accept", "application/json" },
         },
             };
